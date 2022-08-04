@@ -304,6 +304,13 @@ ul li {
     text-align: left;
 }
 
+.errorlist li {
+    list-style: circle;
+    font-size: 12px;
+    color: red;
+    line-height: 20px;
+}
+
 .auth-btn {
     color: black;
     text-decoration: none;
