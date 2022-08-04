@@ -1,0 +1,41 @@
+{% extends 'authbase.html' %} 
+
+{% load static %}
+
+{% block title %} Login {% endblock %} 
+
+{% block content %}
+
+    <div class="yelo">
+        <div class="form-container">
+            <div class="form-heading"> 
+                <h1 class="auth-title">Log in</h1>
+                <p>Don't have an account yet? <a href="{% url 'signup' %}">Sign up</a></p>
+            </div>
+            <form id="LoginForm" method="POST">
+                {% csrf_token %}
+                <div class="input-container">
+                    <div class="form-field-container">
+                        <div class="form-field">
+                            <label for="username">Username</label>
+                            <input name="username" id="username" type="text" placeholder="Enter your Username">
+                        </div>
+                        <div class="form-field">      
+                            <label for="password">Password</label>
+                            <input name="password" id="password" type="password" placeholder="Enter your Password">
+                        </div>
+                    </div>
+                    <div class="buttons">      
+                        <button type="submit" class="auth-btn submit-btn">Login</button>
+                        <p>OR</p>
+                        <a href="#" class="auth-btn google-btn">
+                            <span class="google-icon"><img src="{% static 'base/images/icons/google-icon.svg' %}"></span>
+                            Continue with Google
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

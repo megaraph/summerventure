@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Summer venture | Home</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- Style tags -->
+        <link rel="stylesheet" href="{% static 'base/css/base.css' %}" />
+        <link
+            rel="stylesheet"
+            href="{% static 'challenges/css/styles.css' %}"
+        />
+        <link rel="stylesheet" href="{% static 'challenges/css/cards.css' %}" />
+        <link rel="stylesheet" href="{% static 'base/css/navbar.css' %}" />
+
+        {% block additional_styles %} {% endblock %}
+    </head>
+    <body>
+        <header>{% include 'base/navbar.html' %}</header>
+
+        <main>
+            <div class="search-form-container">
+                <form action="">
+                    <input type="text" placeholder="Search something" />
+                    <button type="submit">
+                        <img
+                            src="{% static 'base/images/icons/search.svg' %}"
+                            alt="Search button"
+                        />
+                    </button>
+                </form>
+            </div>
+
+            {% block content %} {% endblock %}
+        </main>
+    </body>
+</html>
