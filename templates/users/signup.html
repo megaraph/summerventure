@@ -12,26 +12,27 @@
                 <h1 class="auth-title">Sign Up</h1>
                 <p>Already have an account? <a href="{% url 'login' %}">Log In</a></p>
             </div>
-            <form id="LoginForm">
+            <form id="LoginForm" method="POST">
+                {% csrf_token %}
                 <div class="input-container">
                     <div class="form-field-container">
                         <div class="form-field">
                             <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
-                            {{ form.username }}
+                            {{ form.username }} 
+                            {{ form.username.errors }} 
                         </div>
                         <div class="form-field">
                             <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
                             {{ form.password }}
+                            {{ form.password.errors }}
                         </div>
                         <div class="form-field">
                             <label for="{{ form.password_confirm.id_for_label }}">{{ form.password_confirm.label }}</label>
                             {{ form.password_confirm }}
+                            {{ form.password_confirm.errors }}
                         </div>
                         <div class="password-policy-list">    
                             <ul>
-                                <li>
-                                    Your password can’t be too similar to your other personal information.
-                                </li> 
                                 <li>
                                     Your password must contain at least 8 characters.
                                 </li>
