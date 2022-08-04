@@ -1,0 +1,391 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700&family=Poppins:wght@100;300;400;500;600;700&display=swap");
+
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: Inter, sans-serif;
+}
+
+.onboard-nav {
+    background-color: white;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.branding {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.branding a {
+    text-decoration: none;
+}
+
+.branding img {
+    height: 32px;
+    width: 32px;
+}
+
+.branding h1 {
+    font-weight: 400;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    color: black;
+}
+
+/* Set these if screen width is bigger than 420px */
+@media (min-width: 420px) {
+    .branding img {
+        height: 49px;
+        width: 49px;
+    }
+
+    .branding h1 {
+        font-size: 64px;
+    }
+    .h2 {
+        font-size: 64px;
+    }
+
+    .p1 {
+        font-size: 24px;
+        width: 657px;
+        height: 145px;
+        justify-content: left;
+        line-height: 29px;
+    }
+}
+
+/* Set these if screen width is bigger than 320px (size for 13) */
+@media (min-width: 320px) {
+    .branding img {
+        height: 35px;
+        width: 35px;
+    }
+
+    .branding h1 {
+        font-size: 14px;
+    }
+}
+
+p1 {
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.buttons {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.btn_fun {
+    text-decoration: none;
+    font-size: 14px;
+    background: #ffffff;
+    color: black;
+    border: 1px solid #000000;
+    box-shadow: 2px 2px 0px #000000;
+    padding: 8px 30px;
+    margin: 30px 0;
+    border-radius: 10px;
+    transition: 0.2s ease-in-out;
+}
+
+.btn_fun:hover {
+    box-shadow: 4px 4px 0px #000000;
+    transition: 0.2s ease-in-out;
+}
+
+.btn {
+    font-size: 14px;
+    display: inline-block;
+    text-decoration: none;
+    background: none;
+    color: black;
+    transition: 0.4s ease-in-out;
+}
+
+.btn:hover {
+    text-decoration: underline;
+    transition: 0.4s ease-in-out;
+}
+
+.footer {
+    height: 60px;
+    background: #000000;
+    color: #8a8a8a;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.footer p {
+    color: #8a8a8a;
+}
+.footer-col1,
+.footer- col2,
+.footer-col3,
+.footer-col4 {
+    min-width: 250px;
+    margin-bottom: 20px;
+}
+.footer-col3,
+.footer-col4 {
+    flex-basis: 12%;
+    text-align: center;
+}
+.copyright {
+    text-align: center;
+}
+.footer ul {
+    list-style: none;
+}
+.row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.col-2 {
+    flex-basis: 50%;
+    min-width: 300px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.col-2 img {
+    max-width: 100%;
+    padding: 50px 0;
+}
+.col-2 h1 {
+    font-size: 32px;
+    line-height: 60px;
+    margin: 25px 0;
+}
+
+.col-2 p {
+    color: #1d1b1b;
+    width: 263px;
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.col-1,
+.col-2,
+.col-3,
+.col-4 {
+    flex-basis: 100%;
+}
+
+h2 {
+    font-size: 30px;
+    font-family: poppins;
+}
+
+.yelo {
+    opacity: 0.9;
+    background-color: #fec600;
+    display: flex;
+    height: calc(
+        100vh - 72px - 60px
+    ); /*screen height - (header height) - (footer height) */
+}
+
+.sign-up {
+    height: auto;
+    padding: 40px 0;
+}
+
+.form-container {
+    padding-bottom: 20px;
+    background: #fff;
+    width: 300px;
+    position: relative;
+    text-align: center;
+    padding: 20px 0;
+    margin: auto;
+    overflow: hidden;
+    box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+}
+
+.form-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.form-heading a {
+    text-decoration: none;
+    color: #057dcd;
+}
+
+.auth-title {
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 42px;
+}
+
+.form-container p {
+    font-family: "Inter", sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    max-width: 206px;
+}
+
+.form-field-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    width: 100%;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    width: 100%;
+}
+
+.form-field input {
+    padding: 9px;
+    background: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    color: black;
+    font-size: 15px;
+    width: 100%;
+}
+
+.input-container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 206px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.form-btn {
+    display: inline-block;
+}
+
+.buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+ul li {
+    text-align: left;
+}
+
+.auth-btn {
+    color: black;
+    text-decoration: none;
+    background: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+.submit-btn {
+    padding: 12px 0;
+    width: 100%;
+    box-shadow: 4px 4px 0px #ffa408;
+    text-align: center;
+    transition: 0.2s ease-in-out;
+}
+
+.submit-btn:hover {
+    cursor: pointer;
+    background: #e8e8e8;
+    box-shadow: 6px 6px 0px #ffa408;
+    transition: 0.2s ease-in-out;
+}
+
+.google-btn {
+    padding: 12px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    border: 1.03684px solid #000000;
+    box-shadow: 4px 4px 0px #057dcd;
+    border-radius: 10.3684px;
+    transition: 0.2s ease-in-out;
+}
+
+.google-btn:hover {
+    cursor: pointer;
+    background: #e8e8e8;
+    box-shadow: 6px 6px 0px #057dcd;
+    transition: 0.2s ease-in-out;
+}
+
+.password-policy-list {
+    padding-left: 24px;
+    font-size: 11px;
+    font-weight: 300;
+    line-height: 18px;
+    text-indent: -4px;
+}
+
+@media (min-width: 420px) {
+    .auth-title {
+        font-size: 40px;
+    }
+    .form-container {
+        width: 466px;
+    }
+
+    .input-container {
+        max-width: 320px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 419px) {
+    .form-container {
+        width: 320px;
+    }
+    .input-container {
+        max-width: 260px;
+    }
+}
+
+@media (min-height: 780px) {
+    .sign-up {
+        height: calc(
+            100vh - 72px - 60px
+        ); /*screen height - (header height) - (footer height) */
+    }
+}
