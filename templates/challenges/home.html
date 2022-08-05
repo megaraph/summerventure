@@ -1,5 +1,7 @@
 {% extends 'base.html' %} 
 
+<!-- ------ PAGE IDENTITY ------ -->
+
 {% block title %} Explore {% endblock %}
 
 {% block additional_styles %}
@@ -10,6 +12,99 @@
 {% block profile_rank %} {{ user_profile.get_nav_rank_class }} {% endblock %}
 {% block profile_avatar %} {{ user_profile.get_avatar_img }} {% endblock %}
 
+<!-- ------ PAGE IDENTITY ------ -->
+
 {% block content %}
-<h1>{{ current_user.username }}</h1>
+    <h1>Featured today</h1>
+    <div class="featured-cards">
+        <div class="page-content">
+            <div
+                class="card"
+                style="
+                    background-image: url(https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);
+                "
+            >
+                <div class="content">
+                    <h2 class="title">Title here</h2>
+                    <p class="copy">
+                        Lorem ipsum dolor sit amet consectetur
+                        adipisicing elit. Quia, voluptatum!
+                    </p>
+                    <a class="btn" href="#">CHECK IT OUT</a>
+                </div>
+            </div>
+            <div
+                class="card"
+                style="
+                    background-image: url(https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);
+                "
+            >
+                <div class="content">
+                    <h2 class="title">Title here</h2>
+                    <p class="copy">
+                        Lorem ipsum dolor sit amet consectetur
+                        adipisicing elit. Quia, voluptatum!
+                    </p>
+                    <a class="btn" href="#">CHECK IT OUT</a>
+                </div>
+            </div>
+            <div
+                class="card"
+                style="
+                    background-image: url(https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);
+                "
+            >
+                <div class="content">
+                    <h2 class="title">Title here</h2>
+                    <p class="copy">
+                        Lorem ipsum dolor sit amet consectetur
+                        adipisicing elit. Quia, voluptatum!
+                    </p>
+                    <a class="btn" href="#">CHECK IT OUT</a>
+                </div>
+            </div>
+            <div
+                class="card"
+                style="
+                    background-image: url(https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);
+                "
+            >
+                <div class="content">
+                    <h2 class="title">Title here</h2>
+                    <p class="copy">
+                        Lorem ipsum dolor sit amet consectetur
+                        adipisicing elit. Quia, voluptatum!
+                    </p>
+                    <a class="btn" href="#">CHECK IT OUT</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h1>Explore Challenges</h1>
+    <div class="challenge-options">
+        <a href="#" class="random-btn">
+            <img src="images/shuffle.svg" alt="" />
+            <span>Random Challenge</span>
+        </a>
+        <div class="sort-by">
+            <label for="challenge-sort">Sort by</label>
+            <select name="challenges-sort" id="challenge-sort">
+                <option value="title">Title</option>
+                <option value="completion">Completion rate</option>
+                <option value="duration">Duration</option>
+                <option value="difficulty">Difficulty</option>
+            </select>
+        </div>
+    </div>
+    <div class="challenges-container">
+        <a href="#" class="challenge">
+            <h3>Challenge ipsum dolor sit amet mis sempe...</h3>
+            <p class="difficulty">
+                <span>Difficulty:</span> <span class="easy">Easy</span>
+            </p>
+            <p class="completion">
+                <span>Completion rate:</span> <span>34.7%</span>
+            </p>
+        </a>
 {% endblock %}
