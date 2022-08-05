@@ -7,9 +7,9 @@
 </style>
 {% endblock %}
 
+{% block profile_rank %} {{ user_profile.get_nav_rank_class }} {% endblock %}
 {% block profile_avatar %} {{ user_profile.get_avatar_img }} {% endblock %}
 
 {% block content %}
-{{ user_profile.get_avatar_img }}
 <h1>{{ current_user.username }}</h1>
 {% endblock %}

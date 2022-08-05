@@ -59,6 +59,7 @@
                     <a class="nav-item nav-link" href="{% url 'logout' %}">Sign out</a>
                     <a class="nav-item avatar" href="#">
                         <img
+                            class="{% block profile_rank %}nav-rank-recruit{% endblock %}"
                             src="{% block profile_avatar %} https://avatars.dicebear.com/api/adventurer-neutral/default.svg {% endblock %}"
                             alt=""
                         />

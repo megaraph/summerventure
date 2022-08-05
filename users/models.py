@@ -24,3 +24,31 @@ class Profile(models.Model):
 
     def get_avatar_img(self):
         return f"{self.avatar.url}{AVATAR_DEFAULT_SUFFIX}"
+
+    def get_rank(self):
+        if self.rating > 2200:
+            return "savior"
+
+        ranks = {
+            "recruit": range(0, 100),
+            "attendant": range(100, 220),
+            "carrier": range(220, 360),
+            "messenger": range(360, 520),
+            "specialist": range(520, 700),
+            "mentor": range(700, 900),
+            "adventurer": range(900, 1120),
+            "master adventurer": range(1120, 1360),
+            "explorer": range(1360, 1620),
+            "royal explorer": range(1620, 1900),
+            "challenger": range(1900, 2200),
+        }
+
+        for rank in ranks.keys():
+            if self.rating in ranks[rank]:
+                return rank
+
+    def get_nav_rank_class(self):
+        return f"nav-rank-{self.get_rank().replace(' ', '')}"
+
+    def get_rank_class(self):
+        return f"rank-{self.get_rank().replace(' ', '')}"

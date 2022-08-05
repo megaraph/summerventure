@@ -58,8 +58,52 @@ nav {
     transition: 0.3s ease-out;
 }
 
-.nav-rank {
-    border: 5px solid brown;
+.nav-rank-recruit {
+    border: 5px solid var(--rank-recruit);
+}
+
+.nav-rank-attendant {
+    border: 5px solid var(--rank-attendant);
+}
+
+.nav-rank-carrier {
+    border: 5px solid var(--rank-carrier);
+}
+
+.nav-rank-messenger {
+    border: 5px solid var(--rank-messenger);
+}
+
+.nav-rank-specialist {
+    border: 5px solid var(--rank-specialist);
+}
+
+.nav-rank-mentor {
+    border: 5px solid var(--rank-mentor);
+}
+
+.nav-rank-adventurer {
+    border: 5px solid var(--rank-adventurer);
+}
+
+.nav-rank-masteradventurer {
+    border: 5px solid var(--rank-masteradventurer);
+}
+
+.nav-rank-explorer {
+    border: 5px solid var(--rank-explorer);
+}
+
+.nav-rank-royalexplorer {
+    border: 5px solid var(--rank-royalexplorer);
+}
+
+.nav-rank-challenger {
+    border: 5px solid var(--rank-challenger);
+}
+
+.nav-rank-savior {
+    border: 5px solid var(--rank-savior);
 }
 
 .avatar img:hover {
