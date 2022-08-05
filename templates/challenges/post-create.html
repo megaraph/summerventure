@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <a href="#" class="back-link">
+        <img src="{% static 'base/images/icons/arrow-left.svg' %}" alt="" />
+        <span>Back</span>
+    </a>
+
+    <h1>Post</h1>
+    <div class="post-create-container">
+        <form action="" method="POST" enctype="multipart/form-data">
+            <div class="post-create-input-container">
+                <div class="caption-create-container">
+                    <p>Caption</p>
+                    <textarea
+                        name="caption"
+                        id=""
+                        cols="30"
+                        rows="10"
+                        placeholder="Write a caption"
+                    ></textarea>
+                </div>
+                <div class="upload-image-container">
+                    <div class="upload-field-container">
+                        <p>Image</p>
+                        <input
+                            class="image-input"
+                            type="file"
+                            name="image"
+                            id="image-upload"
+                            accept="image/*"
+                        />
+                    </div>
+                    <p class="help-text">
+                        <span>
+                            <img src="{% static 'base/images/icons/info.svg' %}" alt="Info" />
+                        </span>
+                        <span
+                            >An image is required because it acts as
+                            your proof of completion</span
+                        >
+                    </p>
+                </div>
+                <div class="submit-btn-container">
+                    <button type="submit">Mark as done</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
