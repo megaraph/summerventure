@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.conf import settings
 
-from .forms import RegistrationForm
+from .forms import RegistrationForm, LoginForm
 from .utils import get_avatar, create_avatar_file, delete_avatar_file
 from .models import Profile
 
@@ -17,7 +17,19 @@ def login_view(request):
     if request.user.is_authenticated:
         return redirect("challenges:explore")
 
-    context = {"message": "sup"}
+    form = LoginForm(data=request.POST or None)
+
+    if form.is_valid():
+        username = form.cleaned_data.get("username")
+        password = form.cleaned_data.get("password")
+        user = authenticate(request, username=username, password=password)
+
+        login(request, user)
+        return redirect("challenges:explore")
+
+    context = {
+        "form": form,
+    }
     return render(request, "users/login.html", context=context)
 
 
@@ -51,7 +63,8 @@ def signup_view(request):
         )
         delete_avatar_file(new_avatar_file)
 
-        return redirect("signup")
+        login(request, new_user)
+        return redirect("challenges:explore")
 
     context = {
         "form": form,

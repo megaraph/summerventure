@@ -5,7 +5,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Summer venture | Home</title>
+        <title>Summer venture | {% block title %} Title {% endblock %}</title>
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -21,7 +21,51 @@
         {% block additional_styles %} {% endblock %}
     </head>
     <body>
-        <header>{% include 'base/navbar.html' %}</header>
+        <header>
+            <nav>
+                <div class="branding">
+                    <a href="{% url 'challenges:explore' %}">
+                        <img
+                            src="{% static 'base/images/logo/128x128.svg' %}"
+                            alt="Brand logo of summerverse"
+                        />
+                        <h1>Summer venture</h1>
+                    </a>
+                </div>
+                <input type="checkbox" id="hamburger" />
+                <label for="hamburger" class="menu-btn">
+                    <span>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-menu"
+                        >
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </span>
+                </label>
+                <div class="nav-items-container">
+                    <a class="nav-item nav-link" href="#">Leaderboard</a>
+                    <a class="nav-item nav-link" href="#">Contribute</a>
+                    <a class="nav-item nav-link" href="{% url 'logout' %}">Sign out</a>
+                    <a class="nav-item avatar" href="#">
+                        <img
+                            src="{% block profile_avatar %} https://avatars.dicebear.com/api/adventurer-neutral/default.svg {% endblock %}"
+                            alt=""
+                        />
+                    </a>
+                </div>
+            </nav>
+        </header>
 
         <main>
             <div class="search-form-container">

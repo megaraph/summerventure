@@ -7,6 +7,7 @@ from django.db import models
 
 User = settings.AUTH_USER_MODEL
 AVATAR_STORAGE_FOLDER = "profile-pics"
+AVATAR_DEFAULT_SUFFIX = ".svg"
 
 
 def avatar_upload_handler(instance, filename):
@@ -20,3 +21,6 @@ class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     avatar = models.FileField(upload_to=avatar_upload_handler, null=False, blank=False)
     rating = models.PositiveIntegerField(null=False, blank=False, default=0)
+
+    def get_avatar_img(self):
+        return f"{self.avatar.url}{AVATAR_DEFAULT_SUFFIX}"
