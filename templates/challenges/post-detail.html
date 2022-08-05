@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- ------ PAGE IDENTITY ------ -->
+
+{% block title %} {{ post.caption|truncatechars:20 }} {% endblock %}
+
+{% block additional_styles %}
+<style>
+</style>
+{% endblock %}
+
+<!-- ------ PAGE IDENTITY ------ -->
+
+{% block content %}
+<a href="{{ challenge.get_absolute_url }}" class="back-link">
+    <img src="{% static 'base/images/icons/arrow-left.svg' %}" alt="" />
+    <span>Back</span>
+</a>
+
+<div href="#user" class="user-info post-detail-user-info">
+    <a href="#useravatar">
+        <img
+            class="user-avatar {{ post.user.profile_set.first.get_rank_class }}"
+            src="{{ post.user.profile_set.first.get_avatar_img }}"
+            alt=""
+        />
+    </a>
+    <a href="#username">
+        <span class="username">{{ post.user.username }}</span>
+    </a>
+</div>
+
+<div class="post-info post-detail-info">
+    <div class="caption">
+        <span>Caption</span>
+        <p> {{ post.caption }} </p>
+    </div>
+    <a href="{{ post.image.url }}" target="_blank">
+        <div
+            class="post-detail-img"
+            style="
+                background-image: url({{ post.image.url }});
+            "
+        ></div>
+    </a>
+    {% include 'challenges/partials/post-meta-info.html' %}
+</div>
+
+<h1>Comments</h1>
+<div class="comment-form-container">
+    <form action="">
+        <div class="comment-form-input-container">
+            <textarea
+                class="comment-textarea"
+                name="comment-message"
+                id=""
+                cols="30"
+                rows="10"
+                placeholder="Write a comment"
+            ></textarea>
+            <button type="submit" class="comment-submit">
+                Comment
+            </button>
+        </div>
+    </form>
+</div>
+<div class="comments-container">
+    {% if comments %}
+        {% for comment in comments %}
+            <div href="#" class="comment">
+                <div href="#user" class="user-info">
+                    <a href="#useravatar">
+                        <img
+                            class="user-avatar {{ comment.user.profile_set.first.get_rank_class }}"
+                            src="{{ comment.user.profile_set.first.get_avatar_img }}"
+                            alt=""
+                        />
+                    </a>
+                    <a href="#username">
+                        <span class="username">@{{ comment.user.username }}</span>
+                    </a>
+                </div>
+                <div class="comment-info">
+                    <a href="#caption">
+                        <p class="caption">{{ comment.message }}</p>
+                    </a>
+                </div>
+                {% include 'challenges/partials/comment-meta-info.html' %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <h3>Be the first one to comment!</h3>
+    {% endif %}
+</div>
+{% endblock %}

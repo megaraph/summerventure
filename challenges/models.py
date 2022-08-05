@@ -39,6 +39,9 @@ class Challenge(models.Model):
     difficulty = models.IntegerField(choices=ChallengeDifficulty.choices)
     status = models.CharField(max_length=1, choices=ChallengeApprovalStatus.choices)
 
+    def get_absolute_url(self):
+        return reverse("challenges:detail", kwargs={"id": self.pk})
+
     def get_all_attempts(self):
         return self.attempt_set.all()
 
@@ -135,6 +138,15 @@ class Post(models.Model):
     caption = models.CharField(max_length=200, null=False, blank=False)
     image = models.ImageField(upload_to=False, null=False)
 
+    def get_absolute_url(self):
+        return reverse(
+            "challenges:post_detail",
+            kwargs={"chal_id": self.challenge.id, "id": self.pk},
+        )
+
+    def get_all_comments(self):
+        return self.comment_set.all()
+
     def get_upvote_count(self):
         return self.postupvote_set.count()
 
@@ -177,16 +189,73 @@ class Comment(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True, blank=False, null=False)
     message = models.CharField(max_length=200, null=False, blank=False)
 
+    def get_upvote_count(self):
+        return self.commentupvote_set.count()
+
+    def get_downvote_count(self):
+        return self.commentdownvote_set.count()
+
+    def get_vote_count(self):
+        return self.get_upvote_count() - self.get_downvote_count()
+
+    def get_reply_count(self):
+        return self.comment_set.count()
+
+    def get_upvote_url(self):
+        return reverse(
+            "challenges:comment_vote", kwargs={"id": self.pk, "action": "upvote"}
+        )
+
+    def get_downvote_url(self):
+        return reverse(
+            "challenges:comment_vote", kwargs={"id": self.pk, "action": "downvote"}
+        )
+
+    def has_upvoted_comment(self, user):
+        upvote = CommentUpvote.objects.filter(comment=self, user=user).first()
+        return upvote is not None
+
+    def has_downvoted_comment(self, user):
+        downvote = CommentDownvote.objects.filter(comment=self, user=user).first()
+        return downvote is not None
+
+    def remove_upvote(self, user):
+        upvote = CommentUpvote.objects.filter(comment=self, user=user).first()
+        upvote.delete()
+        return True
+
+    def remove_downvote(self, user):
+        downvote = CommentDownvote.objects.filter(comment=self, user=user).first()
+        downvote.delete()
+        return True
+
+    def vote_comment(self, user, action):
+        if action == "upvote":
+            if self.has_upvoted_comment(user):
+                success = self.remove_upvote(user)
+                return success
+
+            if self.has_downvoted_comment(user):
+                success = self.remove_downvote(user)
+            CommentUpvote.objects.create(user=user, comment=self, post=self.post)
+        else:
+            if self.has_downvoted_comment(user):
+                success = self.remove_downvote(user)
+                return success
+            if self.has_upvoted_comment(user):
+                success = self.remove_upvote(user)
+            CommentDownvote.objects.create(user=user, comment=self, post=self.post)
+
 
 class CommentUpvote(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True, blank=False, null=False)
 
 
 class CommentDownvote(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True, blank=False, null=False)

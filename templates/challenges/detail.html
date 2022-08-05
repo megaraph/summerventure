@@ -43,21 +43,10 @@
     </div>
 
     <h1>Completers</h1>
-    <div class="challenge-options">
-        <div class="sort-by">
-            <label for="challenge-sort">Sort by</label>
-            <select name="challenges-sort" id="challenge-sort">
-                <option value="title">Title</option>
-                <option value="completion">Completion rate</option>
-                <option value="duration">Duration</option>
-                <option value="difficulty">Difficulty</option>
-            </select>
-        </div>
-    </div>
     <div class="posts-container">
         {% if posts %}
             {% for post in posts %}
-                <div href="#" class="post">
+                <div class="post">
                     <div href="#user" class="user-info">
                         <a href="#useravatar">
                             <img
@@ -71,11 +60,11 @@
                         </a>
                     </div>
                     <div class="post-info">
-                        <a href="#caption">
+                        <a href="{{ post.get_absolute_url }}">
                             <p class="caption">{{ post.caption }}</p>
                         </a>
                         <a
-                            href="#post-image"
+                            href="{{ post.get_absolute_url }}"
                             class="post-img"
                             style="
                                 background-image: url({{ post.image.url }});

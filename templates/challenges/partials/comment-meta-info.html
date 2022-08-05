@@ -1,0 +1,30 @@
+{% load static %}
+{% load challenge_extras %}
+
+<div id="commentInfo{{ comment.id }}" class="comment-meta-info"
+    hx-target="#commentInfo{{ comment.id }}"
+    hx-swap="outerHTML"
+>   
+    {% has_upvoted_comment request.user comment as user_upvoted_comment %}
+    {% has_downvoted_comment request.user comment as user_downvoted_comment %}
+    <div class="two-votes">
+        <a class="upvotes {% if user_upvoted_comment %} upvote-shaded {% endif %}" hx-post="{{ comment.get_upvote_url }}">
+            <span class="upvote">
+                <img src="{% static 'base/images/icons/chevrons-up.svg' %}" alt="" />
+            </span>
+        </a>
+        <span class="vote-count">{{ comment.get_vote_count }}</span>
+        <a class="downvotes {% if user_downvoted_comment %} downvote-shaded {% endif %}" hx-post="{{ comment.get_downvote_url }}">
+            <span class="downvote">
+                <img
+                    src="{% static 'base/images/icons/chevrons-down.svg' %}"
+                    alt=""
+                />
+            </span>
+        </a>
+    </div>
+    <a href="#comments" class="comments">
+        <img src="{% static 'base/images/icons/message-square.svg' %}" alt="" />
+        <span class="comment-count">{{ comment.get_reply_count }}</span>
+    </a>
+</div>

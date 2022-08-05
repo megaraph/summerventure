@@ -25,7 +25,7 @@
                     <div class="content">
                         <h2 class="title">{{ featured.title|truncatechars:24 }}</h2>
                         <p class="copy"> {{ featured.description|truncatechars:40 }} </p>
-                        <a class="btn" href="#">CHECK IT OUT</a>
+                        <a class="btn" href="{{ featured.get_absolute_url }}">CHECK IT OUT</a>
                     </div>
                 </div>
             {% endfor %}
@@ -34,23 +34,14 @@
 
     <h1>Explore Challenges</h1>
     <div class="challenge-options">
-        <a href="#" class="random-btn">
+        <a href="{% url 'challenges:random' %}" class="random-btn">
             <img src="{% static 'base/images/icons/shuffle.svg' %}" alt="" />
             <span>Random Challenge</span>
         </a>
-        <div class="sort-by">
-            <label for="challenge-sort">Sort by</label>
-            <select name="challenges-sort" id="challenge-sort">
-                <option value="title">Title</option>
-                <option value="completion">Completion rate</option>
-                <option value="duration">Duration</option>
-                <option value="difficulty">Difficulty</option>
-            </select>
-        </div>
     </div>
     <div class="challenges-container">
         {% for challenge in challenges %} 
-            <a href="#" class="challenge">
+            <a href="{{ challenge.get_absolute_url }}" class="challenge">
                 <h3>{{ challenge.title|truncatechars:40 }}</h3>
                 <p class="difficulty">
                     <span>Difficulty:</span> <span class="{{ challenge.difficulty_translate }}">{{ challenge.difficulty_translate|capfirst }}</span>

@@ -9,3 +9,7 @@ def get_featured_challenges(query_set, quantity):
 
     random.seed(seed)
     return random.sample(list(query_set), quantity)
+
+
+def get_random_challenge(query_set):
+    return random.sample(list(query_set), 1)[0]
