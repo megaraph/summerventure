@@ -9,6 +9,7 @@ requests = "*"
 psycopg2 = "*"
 pillow = "*"
 django-cloudinary-storage = "*"
+django-htmx = "*"
 
 [dev-packages]
 black = "*"

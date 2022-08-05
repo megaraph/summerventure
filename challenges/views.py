@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 
 from users.models import Profile
-from .models import Challenge
+from .models import Challenge, Post, PostUpvote
 
 from .utils import get_featured_challenges
 
@@ -27,9 +27,29 @@ def home(request):
 
 @login_required
 def challenge_detail_view(request, id):
+    current_user = request.user
+    user_profile = Profile.objects.filter(user=current_user).first()
     challenge = get_object_or_404(Challenge, pk=id)
-    context = {"challenge": challenge}
+    posts = challenge.get_all_posts()
+    context = {
+        "current_user": current_user,
+        "user_profile": user_profile,
+        "challenge": challenge,
+        "posts": posts,
+    }
     return render(request, "challenges/detail.html", context=context)
+
+
+@login_required
+def challenge_post_upvote(request, id):
+    if request.method == "POST":
+        post = get_object_or_404(Post, pk=id)
+        post.upvote_post(request.user)
+        context = {
+            "post": post,
+        }
+
+    return render(request, "challenges/partials/post-meta-info.html", context=context)
 
 
 @login_required

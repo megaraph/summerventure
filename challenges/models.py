@@ -8,6 +8,7 @@ from urllib.parse import quote
 from django.db import models
 from django.db.models.signals import pre_save, post_save
 from django.conf import settings
+from django.urls import reverse
 
 User = settings.AUTH_USER_MODEL
 POST_STORAGE_FOLDER = "posts"
@@ -40,6 +41,9 @@ class Challenge(models.Model):
 
     def get_all_attempts(self):
         return self.attempt_set.all()
+
+    def get_all_posts(self):
+        return self.post_set.all()
 
     def completion_rate(self):
         # done / (done + failed)
@@ -131,6 +135,31 @@ class Post(models.Model):
     caption = models.CharField(max_length=200, null=False, blank=False)
     image = models.ImageField(upload_to=False, null=False)
 
+    def get_upvote_count(self):
+        return self.postupvote_set.count()
+
+    def get_comment_count(self):
+        return self.comment_set.count()
+
+    def get_upvote_url(self):
+        return reverse("challenges:post_upvote", kwargs={"id": self.pk})
+
+    def has_upvoted_post(self, user):
+        upvote = PostUpvote.objects.filter(post=self, user=user).first()
+        return upvote is not None
+
+    def remove_upvote(self, user):
+        upvote = PostUpvote.objects.filter(post=self, user=user).first()
+        upvote.delete()
+        return True
+
+    def upvote_post(self, user):
+        if self.has_upvoted_post(user):
+            success = self.remove_upvote(user)
+            return success
+
+        PostUpvote.objects.create(user=user, post=self)
+
 
 class PostUpvote(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -142,7 +171,9 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE)
-    parent_comment = models.ForeignKey("self", on_delete=models.CASCADE)
+    parent_comment = models.ForeignKey(
+        "self", on_delete=models.CASCADE, null=True, blank=True
+    )
     pub_date = models.DateTimeField(auto_now_add=True, blank=False, null=False)
     message = models.CharField(max_length=200, null=False, blank=False)
 
