@@ -1,6 +1,9 @@
 import uuid
 import pathlib
 import datetime
+import requests
+
+from urllib.parse import quote
 
 from django.db import models
 from django.db.models.signals import pre_save, post_save
@@ -8,6 +11,8 @@ from django.conf import settings
 
 User = settings.AUTH_USER_MODEL
 POST_STORAGE_FOLDER = "posts"
+
+DIFFICULTIES = ["easy", "medium", "hard"]
 
 
 class ChallengeDifficulty(models.IntegerChoices):
@@ -32,6 +37,46 @@ class Challenge(models.Model):
     duration = models.DurationField(null=False, blank=False)
     difficulty = models.IntegerField(choices=ChallengeDifficulty.choices)
     status = models.CharField(max_length=1, choices=ChallengeApprovalStatus.choices)
+
+    def get_all_attempts(self):
+        return self.attempt_set.all()
+
+    def completion_rate(self):
+        # done / (done + failed)
+        completed_attempts = self.attempt_set.filter(status=AttemptStatus.DONE)
+        failed_attempts = self.attempt_set.filter(status=AttemptStatus.FAILED)
+
+        completed_count = completed_attempts.count()
+        total = completed_count + failed_attempts.count()
+
+        if total == 0:
+            return total
+
+        return round(completed_count / total, 2)
+
+    def get_challenge_image(self, orientation="landscape"):
+        quoted_title = quote(self.title)
+        url = f"https://api.pexels.com/v1/search?query={quoted_title}&orientation={orientation}"
+        res = requests.get(url=url)
+
+        if res.json() is None or not res.ok:
+            return "https://images.pexels.com/photos/1761282/pexels-photo-1761282.jpeg"
+
+        try:
+            size = "medium" if orientation == "portrait" else "large"
+            img_obj = res.json().get("photos")[0]
+            img = img_obj.get("src").get(size)
+        except:
+            return "https://images.pexels.com/photos/1761282/pexels-photo-1761282.jpeg"
+
+        return img
+
+    def get_featured_image(self):
+        print(self.get_challenge_image(orientation="portrait"))
+        return self.get_challenge_image(orientation="portrait")
+
+    def difficulty_translate(self):
+        return DIFFICULTIES[self.difficulty - 1]
 
     def save(self, *args, **kwargs):
         days = self.days

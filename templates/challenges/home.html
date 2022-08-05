@@ -1,5 +1,5 @@
 {% extends 'base.html' %} 
-
+{% load static %}
 <!-- ------ PAGE IDENTITY ------ -->
 
 {% block title %} Explore {% endblock %}
@@ -15,76 +15,30 @@
 <!-- ------ PAGE IDENTITY ------ -->
 
 {% block content %}
-    <h1>Featured today</h1>
+    <h1>Featured this hour</h1>
     <div class="featured-cards">
         <div class="page-content">
-            <div
-                class="card"
-                style="
-                    background-image: url(https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);
-                "
-            >
-                <div class="content">
-                    <h2 class="title">Title here</h2>
-                    <p class="copy">
-                        Lorem ipsum dolor sit amet consectetur
-                        adipisicing elit. Quia, voluptatum!
-                    </p>
-                    <a class="btn" href="#">CHECK IT OUT</a>
+            {% for featured in featured_challenges %}
+                <div
+                    class="card"
+                    style="
+                        background-image: url({{ featured.get_featured_image }});
+                    "
+                >
+                    <div class="content">
+                        <h2 class="title">{{ featured.title|truncatechars:24 }}</h2>
+                        <p class="copy"> {{ featured.description|truncatechars:40 }} </p>
+                        <a class="btn" href="#">CHECK IT OUT</a>
+                    </div>
                 </div>
-            </div>
-            <div
-                class="card"
-                style="
-                    background-image: url(https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);
-                "
-            >
-                <div class="content">
-                    <h2 class="title">Title here</h2>
-                    <p class="copy">
-                        Lorem ipsum dolor sit amet consectetur
-                        adipisicing elit. Quia, voluptatum!
-                    </p>
-                    <a class="btn" href="#">CHECK IT OUT</a>
-                </div>
-            </div>
-            <div
-                class="card"
-                style="
-                    background-image: url(https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);
-                "
-            >
-                <div class="content">
-                    <h2 class="title">Title here</h2>
-                    <p class="copy">
-                        Lorem ipsum dolor sit amet consectetur
-                        adipisicing elit. Quia, voluptatum!
-                    </p>
-                    <a class="btn" href="#">CHECK IT OUT</a>
-                </div>
-            </div>
-            <div
-                class="card"
-                style="
-                    background-image: url(https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);
-                "
-            >
-                <div class="content">
-                    <h2 class="title">Title here</h2>
-                    <p class="copy">
-                        Lorem ipsum dolor sit amet consectetur
-                        adipisicing elit. Quia, voluptatum!
-                    </p>
-                    <a class="btn" href="#">CHECK IT OUT</a>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 
     <h1>Explore Challenges</h1>
     <div class="challenge-options">
         <a href="#" class="random-btn">
-            <img src="images/shuffle.svg" alt="" />
+            <img src="{% static 'base/images/icons/shuffle.svg' %}" alt="" />
             <span>Random Challenge</span>
         </a>
         <div class="sort-by">
@@ -98,13 +52,16 @@
         </div>
     </div>
     <div class="challenges-container">
-        <a href="#" class="challenge">
-            <h3>Challenge ipsum dolor sit amet mis sempe...</h3>
-            <p class="difficulty">
-                <span>Difficulty:</span> <span class="easy">Easy</span>
-            </p>
-            <p class="completion">
-                <span>Completion rate:</span> <span>34.7%</span>
-            </p>
-        </a>
+        {% for challenge in challenges %} 
+            <a href="#" class="challenge">
+                <h3>{{ challenge.title|truncatechars:40 }}</h3>
+                <p class="difficulty">
+                    <span>Difficulty:</span> <span class="{{ challenge.difficulty_translate }}">{{ challenge.difficulty_translate|capfirst }}</span>
+                </p>
+                <p class="completion">
+                    <span>Completion rate:</span> <span>{{ challenge.completion_rate }}%</span>
+                </p>
+            </a>
+        {% endfor %}
+    </div>
 {% endblock %}

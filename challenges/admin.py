@@ -12,6 +12,7 @@ from .models import (
 
 
 class ChallengeAdmin(admin.ModelAdmin):
+    list_display = ("id", "title", "difficulty", "duration")
     readonly_fields = ("duration",)
 
 
