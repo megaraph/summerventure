@@ -1,13 +1,15 @@
-import tempfile
+from pathlib import Path
+from venv import create
 
 from django.core.files import File
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.conf import settings
 
 from .forms import RegistrationForm
-from .utils import get_avatar
+from .utils import get_avatar, create_avatar_file, delete_avatar_file
 from .models import Profile
 
 
@@ -20,8 +22,8 @@ def login_view(request):
 
 
 def signup_view(request):
-    # if request.user.is_authenticated:
-    #     return redirect("challenges:explore")
+    if request.user.is_authenticated:
+        return redirect("challenges:explore")
 
     form = RegistrationForm(data=request.POST or None)
 
@@ -42,11 +44,12 @@ def signup_view(request):
 
         new_user = User.objects.create_user(username=username, password=password)
 
-        with tempfile.NamedTemporaryFile(delete=True) as temp_img:
-            temp_img.write(avatar)
-
-            new_profile = Profile.objects.create(user=new_user)
-            new_profile.avatar.save(new_file_name, File(temp_img))
+        new_avatar_file = create_avatar_file(new_file_name, avatar)
+        Profile.objects.create(
+            user=new_user,
+            avatar=File(file=open(new_avatar_file, "rb"), name=new_file_name),
+        )
+        delete_avatar_file(new_avatar_file)
 
         return redirect("signup")
 
