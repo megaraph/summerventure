@@ -17,6 +17,17 @@
             </div>
         </header>
 
+        {% if messages %}
+            {% for message in messages %}
+                <div class="error-flash">
+                    <span>
+                        {{ message }}
+                    </span>
+                    <span class="close">✖</span>
+                </div>
+            {% endfor %}
+        {% endif %}
+
         {% block content %} {% endblock %}
 
         <div class="footer">
@@ -27,5 +38,7 @@
                 <p>logo</p>
             </div>
         </div>
+
+        <script src="{% static 'users/js/flash.js' %}"></script>
     </body>
 </html>

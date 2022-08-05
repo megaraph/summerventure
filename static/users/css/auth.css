@@ -304,13 +304,6 @@ ul li {
     text-align: left;
 }
 
-.errorlist li {
-    list-style: circle;
-    font-size: 12px;
-    color: red;
-    line-height: 20px;
-}
-
 .auth-btn {
     color: black;
     text-decoration: none;
@@ -363,6 +356,42 @@ ul li {
     font-weight: 300;
     line-height: 18px;
     text-indent: -4px;
+}
+
+.error-flash { 
+    position: absolute;
+    background-color: #ef4444;
+    opacity: 95%;
+    border-radius: 10px;
+    padding: 0.65rem 1rem;
+    margin-top: 12px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.error-flash .close {
+    user-select: none;
+    margin-right: 8px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    transition: 0.2s ease-out;
+}
+
+.error-flash .close:hover {
+    cursor: pointer;
+    background: #dc2626;
+    transition: 0.1s ease-in;
+}
+
+.hide-error {
+    display: none;
 }
 
 @media (min-width: 420px) {
