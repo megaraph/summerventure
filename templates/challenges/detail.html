@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+<!-- ------ PAGE IDENTITY ------ -->
+
+{% block title %} {{ challenge.title|truncatechars:24 }} {% endblock %}
+
+{% block additional_styles %}
+<style>
+</style>
+{% endblock %}
+
+<!-- ------ PAGE IDENTITY ------ -->
+
+{% block content %}
+    <a href="{% url 'challenges:explore' %}" class="back-link">
+        <img src="{% static 'base/images/icons/arrow-left.svg' %}" alt="" />
+        <span>Back to challenges</span>
+    </a>
+
+    <div class="challenge-info">
+        <div
+            class="challenge-img"
+            style="
+                background-image: url({{ challenge.get_challenge_image }});
+            "
+        ></div>
+        <h3>{{ challenge.title }}</h3>
+        <div class="description">
+            <span>Description</span>
+            <p>{{ challenge.description }}</p>
+        </div>
+        <div class="meta-info">
+            <p><span>Duration:</span> <span>{{ challenge.duration }} hours</span></p>
+            <p>
+                <span>Difficulty:</span> <span class="{{ challenge.difficulty_translate }}">{{ challenge.difficulty_translate|capfirst }}</span>
+            </p>
+            <p><span>Completion Rate:</span> <span>{{ challenge.completion_rate }}%</span></p>
+        </div>
+        {% if attempt %}
+            <a href="{{ challenge.get_challenge_mark_done_url }}">
+                <img src="{% static 'base/images/icons/check-circle.svg' %}" alt="" />
+                <span>Finished? | Time remaining: {{ attempt.time_remaining }}</span>
+            </a>
+        {% else %}
+            <a href="{{ challenge.get_challenge_accept_url }}">
+                <img src="{% static 'base/images/icons/check-circle.svg' %}" alt="" />
+                <span>Accept</span>
+            </a>
+        {% endif %}
+    </div>
+
+    <h1>Completers</h1>
+    <div class="posts-container">
+        {% if posts %}
+            {% for post in posts %}
+                <div class="post">
+                    <div href="#user" class="user-info">
+                        <a href="#useravatar">
+                            <img
+                                class="user-avatar {{ post.user.profile_set.first.get_rank_class }}"
+                                src="{{ post.user.profile_set.first.get_avatar_img }}"
+                                alt=""
+                            />
+                        </a>
+                        <a href="#username">
+                            <span class="username">@{{ post.user.username }}</span>
+                        </a>
+                    </div>
+                    <div class="post-info">
+                        <a href="{{ post.get_absolute_url }}">
+                            <p class="caption">{{ post.caption }}</p>
+                        </a>
+                        <a
+                            href="{{ post.get_absolute_url }}"
+                            class="post-img"
+                            style="
+                                background-image: url({{ post.image.url }});
+                            "
+                        ></a>
+                    </div>
+                    {% include 'challenges/partials/post-meta-info.html' %}
+                </div>
+            {% endfor %}
+        {% else %}
+                <h3>No completers yet. Be the first one!</h3>
+        {% endif %}
+    </div>
+{% endblock %}

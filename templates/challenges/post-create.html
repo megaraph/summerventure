@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <a href="{{ challenge.get_absolute_url }}" class="back-link">
+        <img src="{% static 'base/images/icons/arrow-left.svg' %}" alt="" />
+        <span>Back</span>
+    </a>
+
+    <h1>Post</h1>
+    <div class="post-create-container">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="post-create-input-container">
+                <div class="caption-create-container">
+                    <p>{{ form.caption.label }}</p>
+                    {{ form.caption }}
+                </div>
+                <div class="upload-image-container">
+                    <div class="upload-field-container">
+                        <p>{{ form.image.label }}</p>
+                        <p class="file-upload">{{ form.image }}</p>
+                        {{ form.image.errors }}
+                    </div>
+                    <p class="help-text">
+                        <span>
+                            <img src="{% static 'base/images/icons/info.svg' %}" alt="Info" />
+                        </span>
+                        <span
+                            >An image is required because it acts as
+                            your proof of completion</span
+                        >
+                    </p>
+                </div>
+                <div class="submit-btn-container">
+                    <button type="submit">Mark as done</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

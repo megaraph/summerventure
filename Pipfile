@@ -9,6 +9,9 @@ requests = "*"
 psycopg2 = "*"
 pillow = "*"
 django-cloudinary-storage = "*"
+django-htmx = "*"
+whitenoise = "*"
+django-heroku = "*"
 
 [dev-packages]
 black = "*"

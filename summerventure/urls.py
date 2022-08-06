@@ -16,12 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from .views import landing_page_view
+from . import views
 from users.views import login_view, signup_view, logout_view
 
 urlpatterns = [
-    path("", landing_page_view, name="landing"),
+    path("", views.landing_page_view, name="landing"),
     path("challenges/", include("challenges.urls")),
+    path("users/", include("users.urls")),
     path("login/", login_view, name="login"),
     path("sign-up/", signup_view, name="signup"),
     path("logout/", logout_view, name="logout"),

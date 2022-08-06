@@ -1,0 +1,35 @@
+{% load static %}
+{% load challenge_extras %}
+
+<div id="postInfo{{ post.id }}" class="post-meta-info"
+    hx-target="#postInfo{{ post.id }}"
+    hx-swap="outerHTML"
+    >
+    {% has_upvoted_post request.user post as user_upvoted_post %}
+    <!-- <a class="upvotes upvote-shaded" href="#upvote"> -->
+    <a class="upvotes {% if user_upvoted_post %} upvote-shaded {% endif %}" hx-post="{{ post.get_upvote_url }}">
+        <span class="upvote">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-zap"
+            >
+                <polygon
+                    points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"
+                ></polygon>
+            </svg>
+        </span>
+        <span class="vote-count">{{ post.get_upvote_count }}</span>
+    </a>
+    <a href="{{ post.get_absolute_url }}" class="comments">
+        <img src="{% static 'base/images/icons/message-square.svg' %}" alt="" />
+        <span class="comment-count">{{ post.get_comment_count }}</span>
+    </a>
+</div>

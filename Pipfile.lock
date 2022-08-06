@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "9ef250aa207d9811b01ab3a1d1683f96df316bcf9c86ba47e8c13da1f30b7287"
+            "sha256": "19a861b8316758b6582d6e3c281d5baa33d2f3674f69d6b3ed26a07668c9f7dc"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -46,6 +46,13 @@
             ],
             "version": "==1.29.0"
         },
+        "dj-database-url": {
+            "hashes": [
+                "sha256:ccf3e8718f75ddd147a1e212fca88eecdaa721759ee48e38b485481c77bca3dc",
+                "sha256:cd354a3b7a9136d78d64c17b2aec369e2ae5616fbca6bfbe435ef15bb372ce39"
+            ],
+            "version": "==1.0.0"
+        },
         "django": {
             "hashes": [
                 "sha256:031ccb717782f6af83a0063a1957686e87cb4581ea61b47b3e9addf60687989a",
@@ -61,6 +68,22 @@
             ],
             "index": "pypi",
             "version": "==0.3.0"
+        },
+        "django-heroku": {
+            "hashes": [
+                "sha256:2bc690aab89eedbe01311752320a9a12e7548e3b0ed102681acc5736a41a4762",
+                "sha256:6af4bc3ae4a9b55eaad6dbe5164918982d2762661aebc9f83d9fa49f6009514e"
+            ],
+            "index": "pypi",
+            "version": "==0.3.1"
+        },
+        "django-htmx": {
+            "hashes": [
+                "sha256:52b170e80ef54757f622a3af5f6087af395cda932531c0d3a65fb08d60457c0a",
+                "sha256:ff378eddec0a8e592d0b33f9848f6a050fe93e404a6e99cec354d67aab16c765"
+            ],
+            "index": "pypi",
+            "version": "==1.12.1"
         },
         "idna": {
             "hashes": [
@@ -190,6 +213,14 @@
             ],
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4, 3.5' and python_version < '4'",
             "version": "==1.26.11"
+        },
+        "whitenoise": {
+            "hashes": [
+                "sha256:8e9c600a5c18bd17655ef668ad55b5edf6c24ce9bdca5bf607649ca4b1e8e2c2",
+                "sha256:8fa943c6d4cd9e27673b70c21a07b0aa120873901e099cd46cab40f7cc96d567"
+            ],
+            "index": "pypi",
+            "version": "==6.2.0"
         }
     },
     "develop": {
