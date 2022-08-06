@@ -13,10 +13,10 @@ django-htmx = "*"
 whitenoise = "*"
 django-heroku = "*"
 django-dotenv = "*"
+python-dotenv = "*"
 
 [dev-packages]
 black = "*"
-python-dotenv = "*"
 
 [requires]
 python_version = "3.9"
