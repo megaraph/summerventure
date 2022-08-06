@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 
 from .forms import RegistrationForm, LoginForm
 from .utils import get_avatar, create_avatar_file, delete_avatar_file
@@ -77,3 +78,11 @@ def logout_view(request):
         logout(request)
 
     return redirect("login")
+
+
+@login_required
+def user_page(request, id):
+    current_user = User.objects.get(id=id)
+    user_profile = Profile.objects.filter(user=current_user).first()
+    context = {"current_user": current_user, "user_profile": user_profile}
+    return render(request, "users/user.html", context=context)

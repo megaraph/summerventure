@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Summer venture | {{ current_user.username }} </title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="{% static 'base/css/base.css' %}" />
+        <link
+            rel="stylesheet"
+            href="{% static 'challenges/css/styles.css' %}"
+        />
+        <link rel="stylesheet" href="{% static 'base/css/navbar.css' %}" />
+    </head>
+    <body>
+        <header>
+            {% include 'base/navbar.html' %}
+        </header>
+
+        <main>
+
+            <div class="user-container">
+                <img
+                    class="{{ user_profile.get_nav_rank_class }}"
+                    src="{{ user_profile.get_avatar_img }}"
+                    alt=""
+                />
+                <p>Rating: {{ user_profile.rating }}</p>
+                <p>Username: {{ current_user.username }}</p>
+                <p>Rank: {{ user_profile.get_rank }}</p>
+                <a href="">
+                    All challenges
+                </a>
+                <a href="">
+                    In-progress challenges
+                </a>
+                <a href="">
+                    Comments and replies
+                </a>
+            </div>
+        </main>
+    </body>
+</html>

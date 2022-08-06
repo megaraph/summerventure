@@ -562,6 +562,25 @@ main h1 {
     transition: 0.1s ease-in;
 }
 
+.user-container {
+    border: 5px solid black;
+    width: 80%;
+    height: 75vh;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.user-container img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
 @media (max-width: 700px) {
     .challenge-options {
         gap: 1rem;
