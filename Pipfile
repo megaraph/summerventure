@@ -12,6 +12,7 @@ django-cloudinary-storage = "*"
 django-htmx = "*"
 whitenoise = "*"
 django-heroku = "*"
+django-dotenv = "*"
 
 [dev-packages]
 black = "*"
