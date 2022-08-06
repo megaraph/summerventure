@@ -1,0 +1,595 @@
+main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2.5rem;
+}
+
+.search-form-container {
+    text-align: center;
+}
+
+.search-form-container input {
+    width: 88%;
+    padding: 8px 12px;
+    font-size: 1rem;
+    background: #ffffff;
+    border: 2px solid #1e1e1e;
+    border-radius: 10px;
+}
+
+.search-form-container img {
+    width: 16px;
+    height: 16px;
+}
+
+.search-form-container button {
+    padding: 8px;
+    background: #ffffff;
+    border: 1px solid #1e1e1e;
+    box-shadow: 2px 2px 0px #ffa408;
+    border-radius: 10px;
+    transition: 0.3s ease-out;
+}
+
+.search-form-container button:hover {
+    background-color: whitesmoke;
+    box-shadow: 4px 4px 0px #ffa408;
+    transition: 0.1s ease-in;
+}
+
+main h1 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 2.5;
+    line-height: 3.75rem;
+    margin-top: 1.5rem;
+}
+
+.challenge-options {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.random-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 294px;
+    padding: 8px 0;
+    color: black;
+    font-size: 1rem;
+    font-weight: 500;
+    background: #44f2e4;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    transition: 0.2s ease-out;
+}
+
+.random-btn:hover,
+.random-btn:focus {
+    background: none;
+    box-shadow: 8px 8px 0 0 #44f2e4;
+    transition: 0.1s ease-in;
+}
+
+.sort-by select {
+    width: 233px;
+    padding: 8px;
+    background: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 10px;
+}
+
+.challenges-container {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+}
+
+.challenge {
+    color: black;
+    padding: 0.75rem;
+    background: #ffffff;
+    border: 1px solid #000000;
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    transition: 0.2s ease-out;
+}
+
+.challenge:hover {
+    background: whitesmoke;
+    box-shadow: 8px 8px 0 0 #44f2e4;
+    transition: 0.2s ease-in;
+}
+
+.challenge h3 {
+    font-weight: 500;
+    font-size: 1.75rem;
+    line-height: 34px;
+    margin-bottom: 0.75rem;
+}
+
+.challenge span {
+    line-height: 24px;
+}
+
+.easy {
+    color: #1b8d49;
+}
+
+.medium {
+    color: #a7a10f;
+}
+
+.hard {
+    color: #bb0b16;
+}
+
+.back-link {
+    text-decoration: underline;
+    color: black;
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.back-link:hover {
+    opacity: 90%;
+}
+
+.challenge-img {
+    margin-top: 1.5rem;
+    background: blue;
+    width: 100%;
+    height: 220px;
+    border-radius: 10px;
+    background-size: cover;
+    background-position: center center;
+    filter: brightness(80%);
+}
+
+.challenge-img img {
+    width: 100%;
+}
+
+.challenge-info h3 {
+    margin: 1.5rem 0;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 36px;
+}
+
+.description span,
+.post-detail-info .caption span {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    line-height: 21px;
+    color: #333333;
+    margin-bottom: 0.5rem;
+}
+
+.description p {
+    font-size: 1rem;
+    width: 100%;
+}
+
+.meta-info {
+    margin: 1.5rem 0;
+    border: 1px solid black;
+    border-radius: 10px;
+    text-align: center;
+    padding: 12px;
+}
+
+.meta-info p {
+    line-height: 30px;
+}
+
+.challenge-info a {
+    padding: 0.875rem 0;
+    font-weight: 500;
+    color: white;
+    text-transform: uppercase;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    background: #1b8d49;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    transition: 0.3s ease-out;
+}
+
+.challenge-info a:hover {
+    color: black;
+    background: none;
+    box-shadow: 8px 8px 0 0 #1b8d49;
+    transition: 0.1s ease-in;
+}
+
+.posts-container,
+.comments-container {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.post,
+.comment {
+    color: black;
+    padding: 24px;
+    width: 100%;
+    border: 1px solid #000000;
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.comment-detail-container .comment {
+    box-shadow: none;
+}
+
+.user-avatar {
+    height: 32px;
+    width: 32px;
+    border-radius: 100%;
+    margin-top: 3px;
+}
+
+.user-info .rank-recruit {
+    border: 3px solid var(--rank-recruit);
+}
+
+.user-info .rank-attendant {
+    border: 3px solid var(--rank-attendant);
+}
+
+.user-info .rank-carrier {
+    border: 3px solid var(--rank-carrier);
+}
+
+.user-info .rank-messenger {
+    border: 3px solid var(--rank-messenger);
+}
+
+.user-info .rank-specialist {
+    border: 3px solid var(--rank-specialist);
+}
+
+.user-info .rank-mentor {
+    border: 3px solid var(--rank-mentor);
+}
+
+.user-info .rank-adventurer {
+    border: 3px solid var(--rank-adventurer);
+}
+
+.user-info .rank-masteradventurer {
+    border: 3px solid var(--rank-masteradventurer);
+}
+
+.user-info .rank-explorer {
+    border: 3px solid var(--rank-explorer);
+}
+
+.user-info .rank-royalexplorer {
+    border: 3px solid var(--rank-royalexplorer);
+}
+
+.user-info .rank-challenger {
+    border: 3px solid var(--rank-challenger);
+}
+
+.user-info .rank-savior {
+    border: 3px solid var(--rank-savior);
+}
+
+.user-avatar:hover {
+    opacity: 90%;
+}
+
+.post-detail-user-info {
+    margin-top: 1.5rem;
+}
+
+.user-info a {
+    color: black;
+}
+
+.user-info {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.post .user-info span,
+.comment .user-info span {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 0.9375rem;
+}
+
+.post .user-info span:hover,
+.comment .user-info span:hover {
+    opacity: 90%;
+}
+
+.post-info,
+.comment-info {
+    display: flex;
+    gap: 1.5rem;
+    flex-direction: column;
+}
+
+.post-detail-info {
+    margin-top: 0.875rem;
+}
+
+.post .post-info .caption,
+.comment .comment-info .caption {
+    color: black;
+    font-size: 0.9375rem;
+    line-height: 20px;
+}
+
+.post .post-info .post-img {
+    width: 100%;
+    height: 360px;
+    background-size: cover;
+    background-position: center center;
+    border-radius: 10px;
+}
+
+.post .post-info .post-img:hover,
+.post-detail-img:hover {
+    filter: brightness(80%);
+}
+
+.post-meta-info,
+.comment-meta-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.upvotes,
+.comments {
+    color: #333333;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.upvote-shaded span {
+    fill: #a7a10f;
+    color: #a7a10f;
+}
+
+.upvotes:hover .upvote,
+.upvotes:hover .vote-count {
+    cursor: pointer;
+    fill: #8b870f;
+    color: #8b870f;
+}
+
+.upvote-shaded:hover .upvote,
+.upvote-shaded:hover .vote-count {
+    cursor: pointer;
+    fill: #333333;
+    color: #333333;
+}
+
+.comments:hover {
+    opacity: 90%;
+}
+
+.comments-static {
+    user-select: none;
+}
+
+.comments-static:hover {
+    opacity: 100%;
+}
+
+.post-detail-img {
+    width: 100%;
+    height: 560px;
+    background-size: cover;
+    background-position: center center;
+    border-radius: 10px;
+}
+
+.comment-detail-container {
+    margin-top: 1.25rem;
+}
+
+.comment-form-container {
+    margin: 1.25rem 0;
+}
+
+.comment-form-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.comment-textarea {
+    padding: 12px;
+    width: 100%;
+    resize: vertical;
+    background: #f7f7f7;
+    border: 1px solid #000000;
+    border-radius: 10px;
+}
+
+.comment-submit {
+    font-size: 1rem;
+    padding: 12px 0;
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #000000;
+    box-shadow: 4px 4px 0px #1b8d49;
+    border-radius: 10px;
+    transition: 0.3s ease-out;
+}
+
+.comment-submit:hover {
+    box-shadow: 8px 8px 0px #1b8d49;
+    transition: 0.1s ease-in;
+}
+
+.two-votes {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.two-votes img {
+    border: 1px solid black;
+    padding: 4px;
+    border-radius: 10px;
+}
+
+.two-votes img:hover {
+    background-color: whitesmoke;
+}
+
+.two-votes .upvote-shaded img {
+    background: #1b8d49;
+}
+
+.two-votes .upvote-shaded img:hover {
+    opacity: 90%;
+}
+
+.two-votes .downvote-shaded img {
+    background: #b5262e;
+}
+
+.two-votes .downvote-shaded img:hover {
+    opacity: 90%;
+}
+
+.post-create-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.caption-create-container,
+.upload-image-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.caption-create-container p,
+.upload-image-container p {
+    font-family: "Poppins", sans-serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+.help-text {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.help-text span {
+    text-transform: none;
+}
+
+.upload-field-container p {
+    margin-bottom: 5px;
+}
+
+.upload-image-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.image-input::-webkit-file-upload-button {
+    cursor: pointer;
+    padding: 0.5rem;
+    text-align: center;
+    max-width: 128px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    transition: 0.2s ease-out;
+}
+
+.image-input::-webkit-file-upload-button:hover {
+    background: #1b8d49;
+    transition: 0.1s;
+}
+
+.caption-create-container textarea {
+    color: black;
+    padding: 12px;
+    background: #f7f7f7;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    resize: vertical;
+}
+
+.submit-btn-container {
+    max-width: 294px;
+}
+
+.submit-btn-container button {
+    width: 100%;
+    padding: 0.65rem;
+    background: #ffffff;
+    border: 1px solid #000000;
+    box-shadow: 2px 2px 0px #1b8d49;
+    border-radius: 10px;
+    transition: 0.2s ease-out;
+}
+
+.submit-btn-container button:hover {
+    box-shadow: 8px 8px 0px #1b8d49;
+    transition: 0.1s ease-in;
+}
+
+.user-container {
+    border: 5px solid black;
+    width: 80%;
+    height: 75vh;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.user-container img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+@media (max-width: 700px) {
+    .challenge-options {
+        gap: 1rem;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 402px) {
+    .search-form-container input {
+        width: 70%;
+    }
+}

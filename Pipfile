@@ -10,6 +10,7 @@ psycopg2 = "*"
 pillow = "*"
 django-cloudinary-storage = "*"
 django-htmx = "*"
+whitenoise = "*"
 
 [dev-packages]
 black = "*"
