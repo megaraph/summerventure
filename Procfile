@@ -1,1 +1,1 @@
-web: gunicorn cookbook.wsgi --log-file -
+web: gunicorn summerventure.wsgi --log-file -
