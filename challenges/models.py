@@ -1,3 +1,4 @@
+from this import d
 import uuid
 import pathlib
 import datetime
@@ -6,9 +7,10 @@ import requests
 from urllib.parse import quote
 
 from django.db import models
-from django.db.models.signals import pre_save, post_save
+from django.db.models.signals import post_save
 from django.conf import settings
 from django.urls import reverse
+from django.utils import timezone
 
 User = settings.AUTH_USER_MODEL
 POST_STORAGE_FOLDER = "posts"
@@ -46,7 +48,7 @@ class Challenge(models.Model):
         return self.attempt_set.all()
 
     def get_all_posts(self):
-        return self.post_set.all()
+        return self.post_set.all().order_by("-pub_date")
 
     def completion_rate(self):
         # done / (done + failed)
@@ -73,13 +75,22 @@ class Challenge(models.Model):
             size = "medium" if orientation == "portrait" else "large"
             img_obj = res.json().get("photos")[0]
             img = img_obj.get("src").get(size)
-        except:
+        except Exception as e:
+            print(e)
             return "https://images.pexels.com/photos/1761282/pexels-photo-1761282.jpeg"
-
+        print(img)
         return img
 
+    def get_challenge_accept_url(self):
+        return reverse("challenges:accept", kwargs={"id": self.pk})
+
+    def get_challenge_finish_url(self, action):
+        return reverse("challenges:finish", kwargs={"id": self.pk, "action": action})
+
+    def get_challenge_mark_done_url(self):
+        return reverse("challenges:create_post", kwargs={"chal_id": self.pk})
+
     def get_featured_image(self):
-        print(self.get_challenge_image(orientation="portrait"))
         return self.get_challenge_image(orientation="portrait")
 
     def difficulty_translate(self):
@@ -109,8 +120,21 @@ class Attempt(models.Model):
     actual_end_timestamp = models.DateTimeField(null=True, blank=True)
     status = models.CharField(max_length=1, choices=AttemptStatus.choices)
 
+    def time_remaining(self):
+        string_timedelta = str(self.expected_end_timestamp - timezone.now())
+        li = list(map(lambda x: x.strip(), string_timedelta.split(",")))
+
+        if li[0].endswith("days"):
+            days = li.pop(0)
+        else:
+            days = "0 days"
+
+        to_split_hours = li[0]
+        hours, minutes, _ = to_split_hours.split(":")
+
+        return f"{days} {hours} hours and {minutes} minutes"
+
     def save(self, *args, **kwargs):
-        print("on save")
         super().save(*args, **kwargs)
 
 
@@ -124,7 +148,7 @@ def attempt_post_save(sender, created, instance, *args, **kwargs):
 post_save.connect(attempt_post_save, sender=Attempt)
 
 
-def avatar_upload_handler(instance, filename):
+def posts_upload_handler(instance, filename):
     file_path = pathlib.Path(filename)
     new_file_name = str(uuid.uuid1())
 
@@ -136,7 +160,7 @@ class Post(models.Model):
     challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True, blank=False, null=False)
     caption = models.CharField(max_length=200, null=False, blank=False)
-    image = models.ImageField(upload_to=False, null=False)
+    image = models.ImageField(upload_to=posts_upload_handler, null=False)
 
     def get_absolute_url(self):
         return reverse(
@@ -145,7 +169,7 @@ class Post(models.Model):
         )
 
     def get_all_comments(self):
-        return self.comment_set.all()
+        return self.comment_set.filter(parent_comment=None)
 
     def get_upvote_count(self):
         return self.postupvote_set.count()
@@ -188,6 +212,19 @@ class Comment(models.Model):
     )
     pub_date = models.DateTimeField(auto_now_add=True, blank=False, null=False)
     message = models.CharField(max_length=200, null=False, blank=False)
+
+    def get_absolute_url(self):
+        return reverse(
+            "challenges:comment_detail",
+            kwargs={
+                "chal_id": self.challenge.id,
+                "post_id": self.post.id,
+                "id": self.pk,
+            },
+        )
+
+    def get_all_replies(self):
+        return self.comment_set.all()
 
     def get_upvote_count(self):
         return self.commentupvote_set.count()
@@ -249,13 +286,13 @@ class Comment(models.Model):
 
 class CommentUpvote(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True, blank=False, null=False)
 
 
 class CommentDownvote(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True, blank=False, null=False)

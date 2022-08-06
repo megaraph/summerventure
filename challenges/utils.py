@@ -12,4 +12,8 @@ def get_featured_challenges(query_set, quantity):
 
 
 def get_random_challenge(query_set):
+    today = timezone.now()
+    seed = today.hour + today.minute + today.second
+
+    random.seed(seed)
     return random.sample(list(query_set), 1)[0]

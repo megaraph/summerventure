@@ -23,7 +23,7 @@
             </span>
         </a>
     </div>
-    <a href="#comments" class="comments">
+    <a href="{{ comment.get_absolute_url }}" class="comments">
         <img src="{% static 'base/images/icons/message-square.svg' %}" alt="" />
         <span class="comment-count">{{ comment.get_reply_count }}</span>
     </a>

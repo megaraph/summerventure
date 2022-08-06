@@ -36,10 +36,17 @@
             </p>
             <p><span>Completion Rate:</span> <span>{{ challenge.completion_rate }}%</span></p>
         </div>
-        <a href="#">
-            <img src="{% static 'base/images/icons/check-circle.svg' %}" alt="" />
-            <span>Accept</span>
-        </a>
+        {% if attempt %}
+            <a href="{{ challenge.get_challenge_mark_done_url }}">
+                <img src="{% static 'base/images/icons/check-circle.svg' %}" alt="" />
+                <span>Finished? | Time remaining: {{ attempt.time_remaining }}</span>
+            </a>
+        {% else %}
+            <a href="{{ challenge.get_challenge_accept_url }}">
+                <img src="{% static 'base/images/icons/check-circle.svg' %}" alt="" />
+                <span>Accept</span>
+            </a>
+        {% endif %}
     </div>
 
     <h1>Completers</h1>
